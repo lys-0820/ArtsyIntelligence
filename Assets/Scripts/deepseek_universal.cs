@@ -9,6 +9,21 @@ using UnityEngine.Networking;
 
 public class deepseek_universal : MonoBehaviour
 {
+
+    public static deepseek_universal Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     [Header("API Settings")]
     [SerializeField] private string apiKey = "sk-074c57338af94af4a2057c77debd4e57";
     [SerializeField] private string modelName = "deepseek-chat";
@@ -32,7 +47,7 @@ public class deepseek_universal : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        sendMsgToDS("ÄãºÃ", null);
+        //sendMsgToDS("ÄãºÃ", null);
     }
     public void sendMsgToDS(string msg, DialogueCallback callback)
     {
